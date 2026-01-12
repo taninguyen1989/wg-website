@@ -66,6 +66,51 @@ export const TRANSLATIONS = {
                 }
             }
         },
+        contactModal: {
+            title: "Đăng ký Demo/Trial",
+            subtitle: "Điền thông tin để nhận tư vấn và trải nghiệm giải pháp của chúng tôi.",
+            form: {
+                fullName: "Họ và tên",
+                fullNamePlaceholder: "Nguyễn Văn A",
+                email: "Email doanh nghiệp",
+                emailPlaceholder: "ten@congty.vn",
+                phone: "Số điện thoại",
+                phonePlaceholder: "0969 861 612",
+                company: "Tên công ty",
+                companyPlaceholder: "Công ty của bạn",
+                service: "Dịch vụ quan tâm",
+                servicePlaceholder: "Chọn dịch vụ",
+                requestType: "Loại yêu cầu",
+                message: "Lời nhắn (không bắt buộc)",
+                messagePlaceholder: "Mô tả chi tiết nhu cầu của bạn...",
+                submit: "Gửi yêu cầu",
+                submitting: "Đang gửi...",
+                cancel: "Hủy",
+                services: {
+                    docuware: "DocuWare ECM",
+                    erp: "Tích hợp SAP/Epicor ERP",
+                    ai: "AI OCR Integration",
+                    iso: "ISO Document Management",
+                    other: "Khác"
+                },
+                requestTypes: {
+                    demo: "Xem Demo",
+                    trial: "Dùng thử (Trial)",
+                    consultation: "Tư vấn"
+                },
+                validation: {
+                    nameRequired: "Vui lòng nhập họ tên",
+                    emailRequired: "Vui lòng nhập email",
+                    emailInvalid: "Email không hợp lệ",
+                    phoneRequired: "Vui lòng nhập số điện thoại",
+                    phoneInvalid: "Số điện thoại không hợp lệ",
+                    serviceRequired: "Vui lòng chọn dịch vụ",
+                    requestTypeRequired: "Vui lòng chọn loại yêu cầu"
+                },
+                success: "✓ Gửi thành công! Chúng tôi sẽ liên hệ bạn trong vòng 24h.",
+                error: "✗ Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp qua email."
+            }
+        },
         footer: {
             copyright: "© 2026 Công ty cổ phần công nghệ WG. Bảo lưu mọi quyền."
         },
@@ -262,6 +307,51 @@ export const TRANSLATIONS = {
                     ai: "AI OCR Integration",
                     iso: "ISO Document Management"
                 }
+            }
+        },
+        contactModal: {
+            title: "Request Demo/Trial",
+            subtitle: "Fill in your information to get consultation and experience our solutions.",
+            form: {
+                fullName: "Full Name",
+                fullNamePlaceholder: "John Doe",
+                email: "Business Email",
+                emailPlaceholder: "name@company.com",
+                phone: "Phone Number",
+                phonePlaceholder: "+84 969 861 612",
+                company: "Company Name",
+                companyPlaceholder: "Your Company",
+                service: "Service of Interest",
+                servicePlaceholder: "Select service",
+                requestType: "Request Type",
+                message: "Message (Optional)",
+                messagePlaceholder: "Describe your needs in detail...",
+                submit: "Submit Request",
+                submitting: "Sending...",
+                cancel: "Cancel",
+                services: {
+                    docuware: "DocuWare ECM",
+                    erp: "SAP/Epicor ERP Integration",
+                    ai: "AI OCR Integration",
+                    iso: "ISO Document Management",
+                    other: "Other"
+                },
+                requestTypes: {
+                    demo: "View Demo",
+                    trial: "Start Trial",
+                    consultation: "Consultation"
+                },
+                validation: {
+                    nameRequired: "Please enter your name",
+                    emailRequired: "Please enter your email",
+                    emailInvalid: "Invalid email address",
+                    phoneRequired: "Please enter your phone number",
+                    phoneInvalid: "Invalid phone number",
+                    serviceRequired: "Please select a service",
+                    requestTypeRequired: "Please select a request type"
+                },
+                success: "✓ Sent successfully! We will contact you within 24 hours.",
+                error: "✗ An error occurred. Please try again or contact us directly via email."
             }
         },
         footer: {
