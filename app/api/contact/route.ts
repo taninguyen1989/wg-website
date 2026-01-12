@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Validation schema
 const contactSchema = z.object({
     fullName: z.string().min(2, "Name must be at least 2 characters"),
@@ -21,6 +19,18 @@ export async function POST(request: NextRequest) {
 
         // Validate input
         const validatedData = contactSchema.parse(body);
+
+        // Check if API key is configured
+        if (!process.env.RESEND_API_KEY) {
+            console.error("RESEND_API_KEY is not configured");
+            return NextResponse.json(
+                { success: false, error: "Email service not configured" },
+                { status: 500 }
+            );
+        }
+
+        // Initialize Resend with API key
+        const resend = new Resend(process.env.RESEND_API_KEY);
 
         // Service name mapping
         const serviceNames: Record<string, string> = {
@@ -153,7 +163,7 @@ Received at: ${new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh'
 
         if (error instanceof z.ZodError) {
             return NextResponse.json(
-                { success: false, error: "Invalid form data", details: error.errors },
+                { success: false, error: "Invalid form data", details: error.issues },
                 { status: 400 }
             );
         }
