@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { getUserByUsername, verifyPassword } from '@/src/lib/users';
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
     pages: {
         signIn: '/login',
     },
