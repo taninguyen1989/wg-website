@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDropzone } from 'react-dropzone';
-import { Save, Upload, X, Loader2, Calendar } from 'lucide-react';
+import { Save, X, Loader2, Calendar } from 'lucide-react';
 
 interface BlogPostFormProps {
     initialData?: {
@@ -22,7 +21,6 @@ interface BlogPostFormProps {
 export default function BlogPostForm({ initialData, slug, mode }: BlogPostFormProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [uploading, setUploading] = useState(false);
 
     const [formData, setFormData] = useState({
         title: initialData?.title || '',
@@ -35,46 +33,6 @@ export default function BlogPostForm({ initialData, slug, mode }: BlogPostFormPr
     });
 
     const [imagePreview, setImagePreview] = useState(initialData?.image || '');
-
-    // Handle image upload
-    const onDrop = async (acceptedFiles: File[]) => {
-        if (acceptedFiles.length === 0) return;
-
-        const file = acceptedFiles[0];
-        setUploading(true);
-
-        try {
-            const formData = new FormData();
-            formData.append('file', file);
-
-            const response = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                setFormData((prev) => ({ ...prev, image: data.url }));
-                setImagePreview(data.url);
-            } else {
-                alert(data.error || 'Failed to upload image');
-            }
-        } catch (error) {
-            console.error('Error uploading image:', error);
-            alert('Failed to upload image');
-        } finally {
-            setUploading(false);
-        }
-    };
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accept: {
-            'image/*': ['.png', '.jpg', '.jpeg', '.webp', '.gif'],
-        },
-        maxFiles: 1,
-    });
 
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
@@ -131,8 +89,8 @@ export default function BlogPostForm({ initialData, slug, mode }: BlogPostFormPr
                         type="button"
                         onClick={() => setFormData((prev) => ({ ...prev, lang: 'en' }))}
                         className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all ${formData.lang === 'en'
-                                ? 'bg-blue-600 text-white shadow-lg'
-                                : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                            ? 'bg-blue-600 text-white shadow-lg'
+                            : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                             }`}
                     >
                         🇬🇧 English
@@ -141,8 +99,8 @@ export default function BlogPostForm({ initialData, slug, mode }: BlogPostFormPr
                         type="button"
                         onClick={() => setFormData((prev) => ({ ...prev, lang: 'vi' }))}
                         className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all ${formData.lang === 'vi'
-                                ? 'bg-blue-600 text-white shadow-lg'
-                                : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                            ? 'bg-blue-600 text-white shadow-lg'
+                            : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
                             }`}
                     >
                         🇻🇳 Tiếng Việt
@@ -200,7 +158,7 @@ export default function BlogPostForm({ initialData, slug, mode }: BlogPostFormPr
                 />
             </div>
 
-            {/* Image Upload */}
+            {/* Image Upload - URL Input (Vercel Compatible) */}
             <div className="bg-slate-900 rounded-xl p-6 border border-slate-700">
                 <label className="block text-sm font-medium text-slate-300 mb-3">
                     Featured Image
@@ -225,24 +183,24 @@ export default function BlogPostForm({ initialData, slug, mode }: BlogPostFormPr
                         </button>
                     </div>
                 ) : (
-                    <div
-                        {...getRootProps()}
-                        className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${isDragActive
-                                ? 'border-blue-500 bg-blue-500/10'
-                                : 'border-slate-600 hover:border-slate-500 bg-slate-800'
-                            }`}
-                    >
-                        <input {...getInputProps()} />
-                        {uploading ? (
-                            <Loader2 className="w-12 h-12 text-blue-400 mx-auto mb-4 animate-spin" />
-                        ) : (
-                            <Upload className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                        )}
-                        <p className="text-slate-300 mb-2">
-                            {uploading ? 'Uploading...' : 'Drop an image here, or click to select'}
+                    <div className="space-y-3">
+                        <input
+                            type="url"
+                            value={formData.image}
+                            onChange={(e) => {
+                                const url = e.target.value;
+                                setFormData((prev) => ({ ...prev, image: url }));
+                                setImagePreview(url);
+                            }}
+                            className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter image URL or path (e.g., /images/blog/my-image.png)"
+                        />
+                        <p className="text-sm text-slate-400">
+                            💡 <strong>Tip:</strong> Add images to <code className="bg-slate-800 px-2 py-1 rounded">/public/images/blog/</code> via GitHub,
+                            then use path: <code className="bg-slate-800 px-2 py-1 rounded">/images/blog/filename.png</code>
                         </p>
                         <p className="text-sm text-slate-400">
-                            Supports: JPG, PNG, WebP, GIF (max 5MB)
+                            Or use external image URLs (imgur, cloudinary, etc.)
                         </p>
                     </div>
                 )}
