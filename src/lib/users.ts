@@ -66,9 +66,14 @@ export function updateUserPassword(
 
 // Verify user password
 export function verifyPassword(username: string, password: string): boolean {
+    console.log('[USERS] Verifying password for:', username);
     const user = getUserByUsername(username);
     if (!user) {
+        console.log('[USERS] User not found:', username);
         return false;
     }
-    return bcrypt.compareSync(password, user.password);
+    console.log('[USERS] User found, comparing password hash');
+    const result = bcrypt.compareSync(password, user.password);
+    console.log('[USERS] Password comparison result:', result);
+    return result;
 }

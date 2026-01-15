@@ -23,15 +23,20 @@ export const authOptions: AuthOptions = {
                 password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials) {
+                console.log('[AUTH] Login attempt:', { username: credentials?.username });
+
                 if (!credentials?.username || !credentials?.password) {
+                    console.log('[AUTH] Missing credentials');
                     return null;
                 }
 
                 // Verify user credentials from users.json
                 const isValid = verifyPassword(credentials.username, credentials.password);
+                console.log('[AUTH] Password verification result:', isValid);
 
                 if (isValid) {
                     const user = getUserByUsername(credentials.username);
+                    console.log('[AUTH] User found:', user ? 'Yes' : 'No');
                     if (user) {
                         return {
                             id: user.id,
@@ -41,6 +46,7 @@ export const authOptions: AuthOptions = {
                     }
                 }
 
+                console.log('[AUTH] Login failed - returning null');
                 return null;
             },
         }),
