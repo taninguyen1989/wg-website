@@ -12,6 +12,10 @@ if (!process.env.NEXTAUTH_SECRET) {
 
 
 export const authOptions: AuthOptions = {
+    session: {
+        strategy: 'jwt',
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+    },
     pages: {
         signIn: '/login',
     },
@@ -53,12 +57,14 @@ export const authOptions: AuthOptions = {
     ],
     callbacks: {
         async jwt({ token, user }) {
+            console.log('[AUTH] JWT callback - user:', user ? 'Yes' : 'No');
             if (user) {
                 token.id = user.id;
             }
             return token;
         },
         async session({ session, token }) {
+            console.log('[AUTH] Session callback - token.id:', token.id);
             if (token && session.user) {
                 session.user.id = token.id as string;
             }
@@ -66,6 +72,7 @@ export const authOptions: AuthOptions = {
         },
     },
     secret: process.env.NEXTAUTH_SECRET,
+    useSecureCookies: process.env.NEXTAUTH_URL?.startsWith('https://'),
 };
 
 export default NextAuth(authOptions);
