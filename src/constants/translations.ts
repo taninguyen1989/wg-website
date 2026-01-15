@@ -23,12 +23,14 @@ export const TRANSLATIONS = {
             badge: "Tự động hóa quy trình",
             title: "Quy trình xử lý dữ liệu thông minh",
             description: "Tự động hóa luồng thông tin từ khởi tạo đến lưu trữ và phân tích.",
-            step1: "Nguồn Dữ Liệu (ERP)",
-            step1Desc: "Dữ liệu đơn hàng, hóa đơn từ SAP/Epicor được xuất ra tự động.",
-            step2: "Lưu Trữ & Xử Lý (DocuWare)",
-            step2Desc: "Tài liệu được phân loại, index hóa và lưu trữ bảo mật tập trung.",
-            step3: "Phân Tích Thông Minh (AI)",
-            step3Desc: "Tự động trích xuất thông tin, phát hiện bất thường và đề xuất phê duyệt."
+            step1: "Tài Liệu Đầu Vào",
+            step1Desc: "Tài liệu giấy hoặc dữ liệu từ nhiều nguồn và hệ thống khác nhau.",
+            step2: "Trích Xuất Thông Minh (AI OCR)",
+            step2Desc: "AI OCR tự động nhận diện và trích xuất dữ liệu với độ chính xác cao.",
+            step3: "Lưu Trữ Dữ Liệu (ERP)",
+            step3Desc: "Dữ liệu được đồng bộ và lưu trữ an toàn trên hệ thống SAP/Epicor.",
+            step4: "Báo Cáo BI Dashboard",
+            step4Desc: "Hiển thị báo cáo trực quan trên BI Analytics Dashboard tích hợp AI."
         },
         services: {
             title: "Dịch vụ của chúng tôi",
@@ -266,12 +268,14 @@ export const TRANSLATIONS = {
             badge: "Workflow Automation",
             title: "Intelligent Data Processing",
             description: "Automating information flow from initiation to storage and analysis.",
-            step1: "Data Source (ERP)",
-            step1Desc: "Orders and invoices from SAP/Epicor are automatically exported.",
-            step2: "Storage & Processing (DocuWare)",
-            step2Desc: "Documents are classified, indexed, and securely centralized.",
-            step3: "Intelligent Analysis (AI)",
-            step3Desc: "Automatically extract info, detect anomalies, and propose approvals."
+            step1: "Document Input",
+            step1Desc: "Paper documents or data from various sources and systems.",
+            step2: "Intelligent Extraction (AI OCR)",
+            step2Desc: "AI OCR automatically recognizes and extracts data with high accuracy.",
+            step3: "Data Storage (ERP)",
+            step3Desc: "Data is synchronized and securely stored on SAP/Epicor systems.",
+            step4: "BI Dashboard Reports",
+            step4Desc: "Visual reports displayed on AI-integrated BI Analytics Dashboard."
         },
         services: {
             title: "Our Services",
